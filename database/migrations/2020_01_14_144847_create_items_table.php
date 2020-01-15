@@ -15,6 +15,16 @@ class CreateItemsTable extends Migration
     {
         Schema::create('items', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('name');
+            $table->string('detail')->nullable();
+            $table->string('function')->nullable();
+            $table->string('ip_address')->nullable();
+            $table->date('buy_date')->nullable();
+            $table->string('description')->nullable();
+            $table->char('active')->default('1');
+            $table->integer('department_it')->unsigned();
+            $table->integer('category_it')->unsigned();
+            $table->integer('software_it')->unsigned();
             $table->timestamps();
             $table->softDeletes();
         });

@@ -16,4 +16,12 @@ Route::get('/', function () {
     return view('index');
 });
 
-Route::get('{any}', 'VeltrixController@index');
+//Route::get('{any}', 'VeltrixController@index');
+
+Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'middleware' => ['auth']], function () {
+    Route::get('/', 'HomeController@index')->name('home');
+
+});
+Auth::routes(['register' => false]);
+
+Route::get('/home', 'HomeController@index')->name('home');

@@ -15,6 +15,13 @@ class CreateDepartmentsTable extends Migration
     {
         Schema::create('departments', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('name');
+            $table->string('name_kh')->nullable();
+            $table->string('abr')->nullable();
+            $table->string('abr_kh')->nullable();
+            $table->integer('bed')->nullable();
+            $table->string('description')->nullable();
+            $table->char('active')->default('1');
             $table->timestamps();
             $table->softDeletes();
         });

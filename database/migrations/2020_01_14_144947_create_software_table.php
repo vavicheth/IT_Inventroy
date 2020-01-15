@@ -15,6 +15,13 @@ class CreateSoftwareTable extends Migration
     {
         Schema::create('software', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('name');
+            $table->string('version')->nullable();
+            $table->char('license')->default('0');
+            $table->date('last_update')->nullable();
+            $table->date('expire_date')->nullable();
+            $table->string('description')->nullable();
+            $table->char('active')->default('1');
             $table->timestamps();
             $table->softDeletes();
         });
