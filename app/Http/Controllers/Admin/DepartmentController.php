@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Department;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Yajra\DataTables\Facades\DataTables;
+
 
 class DepartmentController extends Controller
 {
@@ -12,9 +15,15 @@ class DepartmentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        if($request->ajax())
+        {
+            $data=Department::all();
+            return DataTables::of($data)->make(true);
+        }
+
+        return view('admin.categories.index');
     }
 
     /**

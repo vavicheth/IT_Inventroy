@@ -18,10 +18,13 @@ Route::get('/', function () {
 
 //Route::get('{any}', 'VeltrixController@index');
 
-Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'middleware' => ['auth']], function () {
+//Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'middleware' => ['auth']], function () {
     Route::get('/', 'HomeController@index')->name('home');
 
-});
+    //Categories
+    Route::resource('departments','Admin\DepartmentController');
+
+//});
 Auth::routes(['register' => false]);
 
 Route::get('/home', 'HomeController@index')->name('home');
