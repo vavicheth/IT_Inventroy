@@ -1,5 +1,9 @@
 @extends('layouts.master')
 
+@section('title')
+    Department List
+@endsection
+
 @section('css')
     <!-- DataTables -->
     <link href="{{ URL::asset('plugins/datatables/dataTables.bootstrap4.min.css') }}" rel="stylesheet" type="text/css" />
@@ -10,7 +14,7 @@
 
 @section('breadcrumb')
     <div class="col-sm-6">
-        <h4 class="page-title">Category List</h4>
+        <h4 class="page-title">Department List</h4>
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="javascript:void(0);">Veltrix</a></li>
             <li class="breadcrumb-item"><a href="javascript:void(0);">Tables</a></li>
@@ -26,21 +30,21 @@
             <div class="card">
                 <div class="card-body">
 
-{{--                    <h4 class="mt-0 header-title">Buttons example</h4>--}}
+                    {{--                    <h4 class="mt-0 header-title">Buttons example</h4>--}}
 
-{{--                    <table id="datatable_category" class="table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">--}}
-{{--                        <thead>--}}
-{{--                        <tr>--}}
-{{--                            <th>Name</th>--}}
-{{--                            <th>Description</th>--}}
-{{--                            <th>Active</th>--}}
-{{--                        </tr>--}}
-{{--                        </thead>--}}
-{{--                    </table>--}}
-
-
-
-
+                    <table id="datatable_department" class="table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                        <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Name Khmer</th>
+                            <th>ABR</th>
+                            <th>ABR KH</th>
+                            <th>Bed</th>
+                            <th>Description</th>
+                            <th>Active</th>
+                        </tr>
+                        </thead>
+                    </table>
                 </div>
             </div>
         </div> <!-- end col -->
@@ -68,33 +72,34 @@
     <script src="{{ URL::asset('assets/pages/datatables.init.js') }}"></script>
 
     <script>
-        {{--$(document).ready(function(){--}}
+        $(document).ready(function(){
 
-        {{--    $('#datatable_category').DataTable({--}}
-        {{--        processing: true,--}}
-        {{--        serverSide: true,--}}
-        {{--        paging:10,--}}
-        {{--        searching:true,--}}
-        {{--        button:true,--}}
-        {{--        buttons: [--}}
-        {{--            'copyHtml5',--}}
-        {{--            'excelHtml5',--}}
-        {{--            'csvHtml5',--}}
-        {{--            'pdfHtml5'--}}
-        {{--        ],--}}
-        {{--        ajax: {--}}
-        {{--            url: "{{route('categories.index')}}",--}}
-        {{--        },--}}
-        {{--        columns: [--}}
-        {{--            {data:'name',name:'name'},--}}
-        {{--            {data:'description',name:'description'},--}}
-        {{--            {data:'active',name:'active'}--}}
-        {{--        ]--}}
-        {{--    });--}}
-        {{--});--}}
-
-
-
+            $('#datatable_department').DataTable({
+                processing: true,
+                serverSide: true,
+                paging:100,
+                searching:true,
+                dom: 'Bfrtip',
+                buttons: [
+                    'copyHtml5',
+                    'excelHtml5',
+                    'csvHtml5',
+                    'pdfHtml5'
+                ],
+                ajax: {
+                    url: "{{route('departments.index')}}",
+                },
+                columns: [
+                    {data:'name',name:'name'},
+                    {data:'name_kh',name:'name_kh'},
+                    {data:'abr',name:'abr'},
+                    {data:'abr_kh',name:'abr_kh'},
+                    {data:'bed',name:'bed'},
+                    {data:'description',name:'description'},
+                    {data:'active',name:'active'}
+                ]
+            });
+        });
 
 
     </script>

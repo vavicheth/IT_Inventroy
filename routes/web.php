@@ -16,15 +16,20 @@ Route::get('/', function () {
     return view('index');
 });
 
+Auth::routes(['register' => false]);
+
+Route::get('/home', 'HomeController@index')->name('home');
+
 //Route::get('{any}', 'VeltrixController@index');
 
 //Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'middleware' => ['auth']], function () {
     Route::get('/', 'HomeController@index')->name('home');
 
-    //Categories
+    //Department
     Route::resource('departments','Admin\DepartmentController');
 
-//});
-Auth::routes(['register' => false]);
+    //Category
+    Route::resource('categories','Admin\CategoryController');
 
-Route::get('/home', 'HomeController@index')->name('home');
+//});
+

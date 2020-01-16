@@ -23,7 +23,7 @@ class DepartmentController extends Controller
             return DataTables::of($data)->make(true);
         }
 
-        return view('admin.categories.index');
+        return view('admin.departments.index');
     }
 
     /**
