@@ -28,15 +28,15 @@
 
 {{--                    <h4 class="mt-0 header-title">Buttons example</h4>--}}
 
-{{--                    <table id="datatable_category" class="table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">--}}
-{{--                        <thead>--}}
-{{--                        <tr>--}}
-{{--                            <th>Name</th>--}}
-{{--                            <th>Description</th>--}}
-{{--                            <th>Active</th>--}}
-{{--                        </tr>--}}
-{{--                        </thead>--}}
-{{--                    </table>--}}
+                    <table id="datatable_category" class="table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                        <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Description</th>
+                            <th>Active</th>
+                        </tr>
+                        </thead>
+                    </table>
 
 
 
@@ -68,30 +68,30 @@
     <script src="{{ URL::asset('assets/pages/datatables.init.js') }}"></script>
 
     <script>
-        {{--$(document).ready(function(){--}}
+        $(document).ready(function(){
 
-        {{--    $('#datatable_category').DataTable({--}}
-        {{--        processing: true,--}}
-        {{--        serverSide: true,--}}
-        {{--        paging:10,--}}
-        {{--        searching:true,--}}
-        {{--        button:true,--}}
-        {{--        buttons: [--}}
-        {{--            'copyHtml5',--}}
-        {{--            'excelHtml5',--}}
-        {{--            'csvHtml5',--}}
-        {{--            'pdfHtml5'--}}
-        {{--        ],--}}
-        {{--        ajax: {--}}
-        {{--            url: "{{route('categories.index')}}",--}}
-        {{--        },--}}
-        {{--        columns: [--}}
-        {{--            {data:'name',name:'name'},--}}
-        {{--            {data:'description',name:'description'},--}}
-        {{--            {data:'active',name:'active'}--}}
-        {{--        ]--}}
-        {{--    });--}}
-        {{--});--}}
+            $('#datatable_category').DataTable({
+                processing: true,
+                serverSide: true,
+                paging:100,
+                searching:true,
+                button:true,
+                buttons: [
+                    'copyHtml5',
+                    'excelHtml5',
+                    'csvHtml5',
+                    'pdfHtml5'
+                ],
+                ajax: {
+                    url: "{{route('categories.index')}}",
+                },
+                columns: [
+                    {data:'name',name:'name'},
+                    {data:'description',name:'description'},
+                    {data:'active',name:'active'}
+                ]
+            });
+        });
 
 
 
