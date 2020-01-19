@@ -93,10 +93,6 @@
             });
         });
 
-
-
-
-
     </script>
 
 @endsection

@@ -20,7 +20,19 @@ class DepartmentController extends Controller
         if($request->ajax())
         {
             $data=Department::all();
-            return DataTables::of($data)->make(true);
+
+            return DataTables::of($data)
+                ->addColumn('action', function ($data) {
+                    $button='<button type="button" name="show" id="'.$data->id.'" class="btn btn-info btn-sm waves-effect">Show</button>';
+                    $button .=' <button type="button" name="edit" id="'.$data->id.'" class="btn btn-success btn-sm waves-effect">Edit</button>';
+                    $button .=' <button type="button" name="delete" id="'.$data->id.'" class="btn btn-danger btn-sm waves-effect">Delete</button>';
+                    return $button;
+                })
+                ->editColumn('active', function ($data) {
+                    return $data->active == 1 ? '<span class="badge badge-success">Active</span>' : '<span class="badge badge-danger">Inactive</span>';
+                })
+                ->rawColumns(['active','action'])
+                ->make(true);
         }
 
         return view('admin.departments.index');
