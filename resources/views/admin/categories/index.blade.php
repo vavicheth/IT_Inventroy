@@ -34,11 +34,10 @@
                             <th>Name</th>
                             <th>Description</th>
                             <th>Active</th>
+                            <th>Action</th>
                         </tr>
                         </thead>
                     </table>
-
-
 
 
                 </div>
@@ -73,9 +72,9 @@
             $('#datatable_category').DataTable({
                 processing: true,
                 serverSide: true,
-                paging:100,
-                searching:true,
-                button:true,
+                paging: 100,
+                searching: true,
+                dom: 'Bfrtip',
                 buttons: [
                     'copyHtml5',
                     'excelHtml5',
@@ -88,7 +87,8 @@
                 columns: [
                     {data:'name',name:'name'},
                     {data:'description',name:'description'},
-                    {data:'active',name:'active'}
+                    {data:'active',name:'active'},
+                    {data:'action',name:'action'}
                 ]
             });
         });

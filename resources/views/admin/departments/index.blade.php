@@ -12,7 +12,11 @@
     <link href="{{ URL::asset('plugins/datatables/responsive.bootstrap4.min.css') }}" rel="stylesheet" type="text/css"/>
 
 
-    <link href="{{ URL::asset('plugins/toastr/toastr.min.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ asset('plugins/jquery-toast/jquery.toast.min.css') }}" rel="stylesheet" type="text/css">
+
+    <!-- Pace reload page !-->
+    <link href="{{ asset('plugins/pace/pace-theme-minimal.css') }}" rel="stylesheet" type="text/css">
+
 @endsection
 
 @section('breadcrumb')
@@ -33,7 +37,6 @@
             <button type="button" name="create_record" id="create_record" class="btn btn-primary waves-effect"
                     data-toggle="modal" data-target="#createModalForm">Add New
             </button>
-            <button type="button" class="btn btn-secondary waves-effect" id="test_toast">Test Toast</button>
 
             <br>
             <div class="card">
@@ -150,8 +153,7 @@
     <!-- Datatable init js -->
     <script src="{{ URL::asset('assets/pages/datatables.init.js') }}"></script>
 
-    <script src="{{ URL::asset('plugins/toastr/toastr.min.js') }}"></script>
-
+    <script src="{{ asset('plugins/jquery-toast/jquery.toast.min.js') }}"></script>
 
 
     <script>
@@ -183,8 +185,8 @@
                     {data: 'action', name: 'action', orderable: false}
                 ]
             });
-            
-            
+
+
             $('#department_form').on('submit',function (event) {
                 event.preventDefault();
                 var action_url="{{route('departments.store')}}";
@@ -194,14 +196,37 @@
                     data:$(this).serialize(),
                     dataType:"json",
                     success:function (data) {
+                        var html='';
+                        if(data.errors)
+                        {
+                            html='<div class="alert alert-danger">';
+                            for(var count=0; count <data.errors.length; count++)
+                            {
+                                html += '<p>' + data.errors[count] + '</p>';
+                            }
+                            html +='</div>';
+                        }
+
+                        if(data.success)
+                        {
+                            html='<div class="alert alert-success">' + data.success + '</div>';
+                            $('#datatable_department').DataTable().ajax.reload();
+                        }
+                        $('#createModalForm').modal('hide');
+                        $.toast({
+                            heading: 'Successful',
+                            text: data.success,
+                            icon: 'success',
+                            loader: true,        // Change it to false to disable loader
+                            loaderBg: '#9EC600',  // To change the background
+                            position:'top-right'
+                        });
 
                     }
                 });
             });
 
-            $('#test_toast').click(function () {
-                toastr.warning('Warning')
-            });
+
             
         });
 

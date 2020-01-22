@@ -11,6 +11,10 @@
         <meta content="Admin Dashboard" name="description" />
         <meta content="Themesbrand" name="author" />
         @include('layouts.head')
+
+        <!-- Pace loading page !-->
+        <link href="{{ asset('plugins/pace/pace-theme-minimal.css') }}" rel="stylesheet" type="text/css">
+        <script src="{{ asset('plugins/pace/pace.min.js') }}"></script>
     </head>
 <body>
     <div id="wrapper">
@@ -26,6 +30,6 @@
         </div> 
         @include('layouts.footer')  
         @include('layouts.footer-script')  
-    </div> 
+    </div>
     </body>
 </html>

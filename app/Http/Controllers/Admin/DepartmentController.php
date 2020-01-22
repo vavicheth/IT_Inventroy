@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Department;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 use Yajra\DataTables\Facades\DataTables;
 
 
@@ -56,7 +57,17 @@ class DepartmentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $rules=array(
+            'name'=>'required',
+            'name_kh'=>'required',
+        );
+        $error=Validator::make($request->all(),$rules);
+        if($error->fails())
+        {
+            return response()->json(['error'=>$error->errors()->all()]);
+        }
+        Department::create($request->all());
+        return response()->json(['success'=>'Department has been created!']);
     }
 
     /**
