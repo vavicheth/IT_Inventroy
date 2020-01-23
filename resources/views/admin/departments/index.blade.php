@@ -80,7 +80,7 @@
                         <div class="form-group row">
                             <label for="name" class="col-sm-3 col-form-label">Name</label>
                             <div class="col-sm-9">
-                                <input class="form-control" type="text" name="name" id="name" required>
+                                <input class="form-control" type="text" name="name" id="name" >
                             </div>
                         </div>
                         <div class="form-group row">
@@ -111,7 +111,13 @@
                             <label for="active" class="col-sm-3 col-form-label">Active</label>
                             <div class="col-sm-9">
                                 <input type="checkbox" id="active" name="active" switch="success" checked/>
-                                <label for="active" data-on-label="Yes" data-off-label="No"></label>
+                                <label for="active" data-on-label="" data-off-label=""></label>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="description" class="col-sm-3 col-form-label">Description</label>
+                            <div class="col-sm-9">
+                                <textarea class="form-control" name="description" id="description" ></textarea>
                             </div>
                         </div>
 
@@ -182,8 +188,12 @@
                     {data: 'bed', name: 'bed'},
                     {data: 'description', name: 'description'},
                     {data: 'active', name: 'active'},
-                    {data: 'action', name: 'action', orderable: false}
-                ]
+                    {data: 'action', name: 'action', orderable: false},
+                    // {data: 'created_at', name: 'created_at', visible:true},
+
+                ],
+                // order: [[8, 'desc']]
+
             });
 
 
@@ -205,22 +215,26 @@
                                 html += '<p>' + data.errors[count] + '</p>';
                             }
                             html +='</div>';
+
                         }
 
                         if(data.success)
                         {
                             html='<div class="alert alert-success">' + data.success + '</div>';
+
                             $('#datatable_department').DataTable().ajax.reload();
+                            $('#department_form')[0].reset();
+                            $('#createModalForm').modal('hide');
+                            $.toast({
+                                heading: 'Successful',
+                                text: data.success,
+                                icon: 'success',
+                                loader: true,        // Change it to false to disable loader
+                                loaderBg: '#9EC600',  // To change the background
+                                position:'top-right'
+                            });
                         }
-                        $('#createModalForm').modal('hide');
-                        $.toast({
-                            heading: 'Successful',
-                            text: data.success,
-                            icon: 'success',
-                            loader: true,        // Change it to false to disable loader
-                            loaderBg: '#9EC600',  // To change the background
-                            position:'top-right'
-                        });
+
 
                     }
                 });

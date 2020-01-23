@@ -18,7 +18,7 @@ class CategoryController extends Controller
     {
         if($request->ajax())
         {
-            $data=Category::take(50000)->get();
+            $data=Category::select(['name','description','active']);
             return DataTables::of($data)
                 ->addColumn('action', function ($data) {
                     $button='<button type="button" name="show" id="'.$data->id.'" class="btn btn-info btn-sm waves-effect">Show</button>';

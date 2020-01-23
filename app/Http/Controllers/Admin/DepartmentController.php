@@ -4,9 +4,11 @@ namespace App\Http\Controllers\Admin;
 
 use App\Department;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\DepartmentUpdateRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Yajra\DataTables\Facades\DataTables;
+
 
 
 class DepartmentController extends Controller
@@ -20,12 +22,12 @@ class DepartmentController extends Controller
     {
         if($request->ajax())
         {
-            $data=Department::all();
+            $data=Department::query()->orderBy('created_at','desc');
 
             return DataTables::of($data)
                 ->addColumn('action', function ($data) {
                     $button='<button type="button" name="show" id="'.$data->id.'" class="btn btn-info btn-sm waves-effect">Show</button>';
-                    $button .=' <button type="button" name="edit" id="'.$data->id.'" class="btn btn-success btn-sm waves-effect">Edit</button>';
+                    $button .=' <a href="' . route('departments.edit', $data->id) . '" class="btn btn-success btn-sm waves-effect">Edit</a>';
                     $button .=' <button type="button" name="delete" id="'.$data->id.'" class="btn btn-danger btn-sm waves-effect">Delete</button>';
                     return $button;
                 })
@@ -57,6 +59,9 @@ class DepartmentController extends Controller
      */
     public function store(Request $request)
     {
+
+        $request['active']=='on' ? $request['active']= '1' : $request['active']='0';
+
         $rules=array(
             'name'=>'required',
             'name_kh'=>'required',
@@ -89,7 +94,8 @@ class DepartmentController extends Controller
      */
     public function edit($id)
     {
-        //
+        $department=Department::findOrFail($id);
+        return view('admin.departments.edit',compact('department'));
     }
 
     /**
@@ -99,9 +105,17 @@ class DepartmentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(DepartmentUpdateRequest $request, $id)
     {
-        //
+//        dd($request->all());
+        $request['active']=='on' ? $request['active']= '1' : $request['active']='0';
+//                dd($request->all());
+        $department=Department::findOrFail($id);
+        $department->update($request->all());
+
+        return redirect()->route('departments.index');
+
+
     }
 
     /**

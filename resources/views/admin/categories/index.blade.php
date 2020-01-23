@@ -70,17 +70,17 @@
         $(document).ready(function(){
 
             $('#datatable_category').DataTable({
-                processing: true,
+                // processing: true,
                 serverSide: true,
                 paging: 100,
                 searching: true,
-                dom: 'Bfrtip',
-                buttons: [
-                    'copyHtml5',
-                    'excelHtml5',
-                    'csvHtml5',
-                    'pdfHtml5'
-                ],
+                // dom: 'Bfrtip',
+                // buttons: [
+                //     'copyHtml5',
+                //     'excelHtml5',
+                //     'csvHtml5',
+                //     'pdfHtml5'
+                // ],
                 ajax: {
                     url: "{{route('categories.index')}}",
                 },
